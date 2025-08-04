@@ -1,0 +1,128 @@
+[
+  {
+    "name": "avohq",
+    "url": "https://avohq.io/blog/rss",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "segment",
+    "url": "https://segment.com/blog/feed.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "openai",
+    "url": "https://openai.com/blog/rss.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "pendo",
+    "url": "https://www.pendo.io/pendo-blog/feed",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "mixpanel",
+    "url": "https://mixpanel.com/blog/feed/",
+    "type": "competitor",
+    "status": "error"
+  },
+  {
+    "name": "databricks",
+    "url": "https://www.databricks.com/rss.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "freshpaint",
+    "url": "https://rss.app/feeds/0S6b7vLWnGFO3Pbs.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "amplitude",
+    "url": "https://rss.app/feeds/Ma06vfcA9qgJA3dZ.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "heap",
+    "url": "https://rss.app/feeds/E41H3hZEVRkAB2Xb.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "zeotap",
+    "url": "https://rss.app/feeds/YPWdGDZ9EeBq67VJ.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "avo",
+    "url": "https://rss.app/feeds/6rBLKkjuHbjxPNub.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "posthog",
+    "url": "https://rss.app/feeds/zfIOyXjRZwkRaEzE.xml",
+    "type": "competitor",
+    "status": "active"
+  },
+  {
+    "name": "logrocket",
+    "url": "https://blog.logrocket.com/feed/",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "otel_collector",
+    "url": "https://github.com/open-telemetry/opentelemetry-collector/releases.atom",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "montecarlo",
+    "url": "https://www.montecarlodata.com/feed/",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "montecarlo_product",
+    "url": "https://www.montecarlodata.com/category/product/feed/",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "towardsdatascience",
+    "url": "https://towardsdatascience.com/feed",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "aws_bigdata",
+    "url": "https://aws.amazon.com/blogs/big-data/feed/",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "snowplow",
+    "url": "https://rss.app/feeds/xxSHa2H0VG127Q4h.xml",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "logrocket_frontend",
+    "url": "https://rss.app/feeds/OQnZqgiK7aZqIv4B.xml",
+    "type": "noncompetitor",
+    "status": "active"
+  },
+  {
+    "name": "towardsdatascience_analytics",
+    "url": "https://rss.app/feeds/jHv0SqVEQUa18Eln.xml",
+    "type": "noncompetitor",
+    "status": "active"
+  }
+]

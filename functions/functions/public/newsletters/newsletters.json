@@ -1,0 +1,28 @@
+[
+  {
+    "title": "2025년 7월셋째주 뉴스레터",
+    "content": "디지털 서비스의 성패는 방문이 중요하지만 머무름의 시간에 달려있습니다. 수 많은 데이터 가운데 이탈율(drop-off rate)은 사용자의 숨은 불편을 드러내는 체온계와 같은데요. 이번은 이탈율에 대해서 다뤄보겠습니다.\n\n페이지방문(view)과 클릭 수만으로는 문제의 지점을 찾기 어렵지만, 이탈율은 퍼널(funnel, 깔대기) 흐름 어디서 흐름이 끊겼는지 정밀하게 보여줍니다.\n\n왜 결제 직전에서 멈췄을까요?\n어떤 화면에서 발길을 돌렸을까요?\n\n이탈율 분석은 이런 질문들, 즉 사람들은 왜 중간에 떠날까에 대한 질문을 데이터로 증명하고, UI·UX 개선, 개인화 마케팅, 제품 로드맵까지 연결하는 실행 가능한, 손에 잡히는 통찰을 제공합니다. 이번 글에서는 이탈율이 왜 필요하고, 얼마나 중요한지 그 이유와 실제 로그 데이터를 통해 얻을 수 있는 구체적 인사이트들을 살펴보겠습니다.",
+    "url": "https://medium.com/@ocean.log.hwang/%EA%B0%80%EC%9E%85%EC%9E%90%EB%8A%94-%EC%99%9C-%EB%96%A0%EB%82%A0%EA%B9%8C-%EC%9D%B4%ED%83%88%EC%9C%A8-%EB%B6%84%EC%84%9D-%EC%8B%9C%EC%9E%91%EC%9D%98-%ED%95%84%EC%9A%94%EC%A1%B0%EA%B1%B4%EB%93%A4-df1ad0f0ba38",
+    "sentDate": "2025-07-27",
+    "htmlFilePath": "/newsletters/newsletter_2025-07-27_1753599516907.html",
+    "recipients": [
+      {
+        "id": "rGfrFeJdfeImsbiLSqq8",
+        "name": "이선규",
+        "company": "에이알커머스",
+        "email": "dlalsrb29@naver.com",
+        "phone": "010-5516-4715",
+        "createdAt": "2025-07-27T06:47:37.952Z"
+      },
+      {
+        "id": "tXz7fkT2nRlatICuoZrA",
+        "name": "이민규",
+        "company": "logbase",
+        "email": "dlalsrb29@gmail.com",
+        "phone": "010-5516-4715",
+        "createdAt": "2025-07-26T08:28:05.607Z"
+      }
+    ],
+    "filename": "newsletter_2025-07-27_1753599516907"
+  }
+]

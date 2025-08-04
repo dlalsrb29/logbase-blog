@@ -1,0 +1,37 @@
+{
+  "name": "logbase-blog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:standalone": "next build && npm run copy-standalone",
+    "copy-standalone": "node scripts/copy-standalone.js",
+    "build:functions": "tsc --project functions/tsconfig.json",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "npm run build:functions && npm run build:standalone && firebase deploy --only functions,hosting"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cheerio": "^1.1.2",
+    "firebase": "^12.0.0",
+    "firebase-admin": "^13.4.0",
+    "fs-extra": "^11.2.0",
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

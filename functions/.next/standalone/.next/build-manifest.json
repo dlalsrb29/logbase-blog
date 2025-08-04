@@ -1,0 +1,65 @@
+{
+  "polyfillFiles": [
+    "static/chunks/polyfills-78c92fac7aa8fdd8.js"
+  ],
+  "devFiles": [],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [
+    "static/NFmIPRQv6MxO93UgBnZ4R/_buildManifest.js",
+    "static/NFmIPRQv6MxO93UgBnZ4R/_ssgManifest.js"
+  ],
+  "rootMainFiles": [],
+  "pages": {
+    "/": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/chunks/pages/index-fcabed23f29d0851.js"
+    ],
+    "/_app": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/css/a73ad729a83c2d79.css",
+      "static/chunks/pages/_app-f6feca356f9a4593.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/chunks/pages/_error-77823ddac6993d35.js"
+    ],
+    "/newsletter": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/chunks/822-539eea3892b9a4b8.js",
+      "static/chunks/pages/newsletter-5fd7befbf5e8ee26.js"
+    ],
+    "/newsletter/edit/[filename]": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/chunks/pages/newsletter/edit/[filename]-134e120de021bf9f.js"
+    ],
+    "/newsletter/subscribers": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/chunks/pages/newsletter/subscribers-52712837e3ea7ff8.js"
+    ],
+    "/newsletter/write": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/chunks/pages/newsletter/write-c2a06ab996a8ff23.js"
+    ],
+    "/rss-feed": [
+      "static/chunks/webpack-ee7e63bc15b31913.js",
+      "static/chunks/framework-ecc4130bc7a58a64.js",
+      "static/chunks/main-cb4281779d2d79ab.js",
+      "static/chunks/pages/rss-feed-6b7502c3974cfc6a.js"
+    ]
+  },
+  "ampFirstPages": []
+}

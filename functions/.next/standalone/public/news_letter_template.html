@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>{{제목}}</title>
+</head>
+<body>
+
+  <!-- 전체 컨테이너 시작 -->
+  <div cellpadding="0" cellspacing="0" style="background-color: #f4f4f4; padding: 15px 10px 15px 10px; width:610px; margin:auto; border:1px solid #e0e0e0; border-radius: 6px;">
+
+    <!-- 메인 테이블 시작 -->
+    <table align="center" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; margin: auto; padding: 0 24px 0 24px; border-radius: 6px;">
+      <!-- HEADER 영역 시작 -->
+      <tr>
+        <td align="left" style="padding: 24px 0 16px 0;">
+          <img src="/social-rss-box-orange-icon.png" alt="LOGO" style="vertical-align: middle; margin-right: 8px; height:35px;" />
+          <span style="font-size: 24px; font-weight: bold; color: #111; line-height: 35px; vertical-align: middle;">LOGBASE</span>
+          <p style="margin-top: 12px; font-size: 14px; color: #666;">
+            <strong>The behavioral data hub</strong> — where experts connect, learn, and lead
+          </p>
+        </td>
+      </tr>
+      <!-- HEADER 영역 끝 -->
+
+      <!-- 타이틀/소개 영역 시작 -->
+      <tr>
+        <td style="background-color:#C0C0C0;text-align:center;padding:30px 20px">
+          <h1 style="color:#000000;font-family:Arial,sans-serif;font-size:28px;font-weight:bold;margin:0;text-transform:uppercase;letter-spacing:1px">{{제목}}</h1>
+          <p style="color:rgba(0,0,0,0.8);font-family:Arial,sans-serif;font-size:16px;margin:10px 0 0 0">행동데이터에 대한 모든 지식의 거점이자 소통의 시작</p>
+        </td>
+      </tr>
+      <!-- 타이틀/소개 영역 끝 -->
+
+      <!-- 오늘의 데이터 뉴스 영역 시작 -->
+      <tr>
+        <td style="padding:30px 20px">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;text-align:center;margin-bottom:25px">
+            <tbody>
+              <tr>
+                <td>
+                  <span style="display:inline-block;background-color:#f0fdfa;color:#0d9488;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;padding:5px 15px">{{발송일}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top:15px">
+                  <h2 style="color:#1f2937;font-family:Arial,sans-serif;font-size:24px;font-weight:bold;margin:0">오늘의 데이터 뉴스</h2>
+                  <p style="color:#6b7280;font-family:Arial,sans-serif;font-size:16px;margin:10px 0 0 0"> {{본문 내용 들어가는 곳}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <!-- 오늘의 데이터 뉴스 영역 끝 -->
+
+      {{URL_INSIGHT_SECTION}}
+
+      <!-- 구분선 -->
+      <tr>
+        <td style="border-bottom: 1px solid #e0e0e0; padding-top: 24px;"></td>
+      </tr>
+
+      <!-- RSS Updates -->
+      <tr>
+        <td>
+          <h3 style="font-size: 16px; color: #111; padding-top: 0px;">Behavioral Data Updates</h3>
+          <ul style="padding-left: 18px; font-size: 13px; color: #444; line-height: 1.6;">
+            {{BEHAVIORAL_DATA_UPDATES}}
+          </ul>
+        </td>
+      </tr>
+
+      <!-- 푸터 스페이서 -->
+      <tr>
+        <td style="padding-bottom: 20px; background-color: #ffffff;"></td>
+      </tr>
+    </table>
+    <!-- 메인 테이블 끝 -->
+
+    <!-- 안내 영역 시작 -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:25px 0;background-color:#f8fafc">
+      <tbody>
+        <tr>
+          <td style="padding:15px;font-family:Arial,sans-serif;font-size:13px;color:#64748b;border-left:3px solid #cbd5e1">
+            <strong>안내:</strong> 본 뉴스레터는 크롤링 기술로 자동 수집하여 분석한 데이터 테크 정보들로, 기사의 중복이나 일부 부정확한 내용이 포함될 수 있으니 참고 위주로만 활용해 주시기 바랍니다.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 안내 영역 끝 -->
+
+    <!-- 공유/구독/푸터 영역 시작 -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:0 0 25px 0;background-color:#f0fdfa">
+      <tbody>
+        <tr>
+          <td style="padding:0 20px 20px 20px">
+            <div style="background-color:#f0fdfa;padding:18px;border-radius:8px;border:1px solid #d1fae5;margin-bottom:10px">
+              <div style="margin-bottom:12px;color:#0f766e;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;text-align:center">
+                뉴스레터가 유용하셨나요? 공유해보세요!
+              </div>
+              <!-- 푸터 CTA 버튼 영역 -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background-color:#f8fafc;border-top:1px solid #e2e8f0">
+                <tbody>
+                  <tr>
+                    <td style="padding:25px 15px;text-align:center">
+                      <p style="color:#64748b;font-family:Arial,sans-serif;font-size:13px;margin:0 0 15px 0">
+                        <a href="https://logbase.kr" style="color:#64748b;text-decoration:none;margin:0 8px" target="_blank">로그베이스 홈페이지</a>
+                        <span style="color:#cbd5e1">|</span>
+                        <a href="mailto:info@logbase.kr" style="color:#64748b;text-decoration:none;margin:0 8px" target="_blank">피드백 보내기</a>
+                        <span style="color:#cbd5e1">|</span>
+                        <a href="https://logbase.kr/privacy" style="color:#64748b;text-decoration:none;margin:0 8px" target="_blank">개인정보 처리방침</a>
+                      </p>
+                      <p style="color:#64748b;font-family:Arial,sans-serif;font-size:13px;margin:0 0 20px 0">
+                        본 메일은 발신 전용이므로 회신하실 수 없습니다.
+                      </p>
+                      <!-- 구독 취소 영역 -->
+                      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;max-width:450px;margin:20px auto;background-color:#f1f5f9">
+                        <tbody>
+                          <tr>
+                            <td style="padding:15px;text-align:center">
+                              <p style="color:#64748b;font-family:Arial,sans-serif;font-size:13px;margin:0 0 10px 0;text-align:center">
+                                더 이상 뉴스레터를 받고 싶지 않으시면 아래 버튼을 클릭하세요
+                              </p>
+                              <a href="https://logbase.kr/unsubscribe" style="display:inline-block;background-color:#f1f5f9;border:1px solid #cbd5e1;color:#475569;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-decoration:none;padding:8px 20px" target="_blank">
+                                구독 취소하기
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- 구독 취소 영역 끝 -->
+                      <p style="color:#94a3b8;font-family:Arial,sans-serif;font-size:12px;margin:15px 0 0 0">
+                        © 2025 Logbase <br>
+                        <a href="mailto:info@logbase.kr" style="color:#94a3b8;text-decoration:none" target="_blank">info@logbase.kr</a>
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- 푸터 CTA 버튼 영역 끝 -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 공유/구독/푸터 영역 끝 -->
+
+  </div>
+  <!-- 전체 컨테이너 끝 -->
+
+</body>
+</html>
