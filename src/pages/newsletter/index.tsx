@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface NewsletterMeta {
   title: string;
@@ -29,6 +30,7 @@ interface SendFormData {
 }
 
 export default function NewsletterPage() {
+  const { user } = useAuth();
   const [newsletters, setNewsletters] = useState<NewsletterMeta[]>([]);
   const [loading, setLoading] = useState(true);
   const [showSendModal, setShowSendModal] = useState(false);
@@ -216,22 +218,24 @@ export default function NewsletterPage() {
     <div className="container">
       <div className="header">
         <h1>뉴스레터 목록</h1>
-        <div className="header-buttons">
-          <button 
-            type="button" 
-            className="btn-subscribers"
-            onClick={() => window.location.href = '/newsletter/subscribers'}
-          >
-            신청자 관리
-          </button>
-          <button 
-            type="button" 
-            className="btn-new"
-            onClick={() => window.location.href = '/newsletter/write'}
-          >
-            새 뉴스레터 작성
-          </button>
-        </div>
+        {user && (
+          <div className="header-buttons">
+            <button 
+              type="button" 
+              className="btn-subscribers"
+              onClick={() => window.location.href = '/newsletter/subscribers'}
+            >
+              신청자 관리
+            </button>
+            <button 
+              type="button" 
+              className="btn-new"
+              onClick={() => window.location.href = '/newsletter/write'}
+            >
+              새 뉴스레터 작성
+            </button>
+          </div>
+        )}
       </div>
       
       <table>
@@ -258,24 +262,28 @@ export default function NewsletterPage() {
                     >
                       미리보기
                     </button>
-                    <button 
-                      type="button" 
-                      className="btn-send"
-                      onClick={() => handleSendClick(item)}
-                      title="이메일 발송"
-                    >
-                      📧 발송
-                    </button>
-                    <Link href={`/newsletter/edit/${encodeURIComponent(item.filename)}`}>
-                      <button type="button" className="btn-edit">편집</button>
-                    </Link>
-                    <button 
-                      type="button" 
-                      className="btn-delete"
-                      onClick={() => handleDelete(item.filename)}
-                    >
-                      삭제
-                    </button>
+                    {user && (
+                      <>
+                        <button 
+                          type="button" 
+                          className="btn-send"
+                          onClick={() => handleSendClick(item)}
+                          title="이메일 발송"
+                        >
+                          📧 발송
+                        </button>
+                        <Link href={`/newsletter/edit/${encodeURIComponent(item.filename)}`}>
+                          <button type="button" className="btn-edit">편집</button>
+                        </Link>
+                        <button 
+                          type="button" 
+                          className="btn-delete"
+                          onClick={() => handleDelete(item.filename)}
+                        >
+                          삭제
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               );
@@ -292,8 +300,38 @@ export default function NewsletterPage() {
 
       {/* 발송 설정 모달 */}
       {showSendModal && selectedNewsletter && (
-        <div className="modal-overlay">
-          <div className="modal">
+        <div className="modal-overlay newsletter-send-modal-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000,
+          visibility: 'visible',
+          opacity: 1
+        }}>
+          <div className="newsletter-send-modal" style={{
+            background: 'white',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            maxWidth: '600px',
+            width: '90%',
+            maxHeight: '92vh',
+            height: 'auto',
+            overflow: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            visibility: 'visible',
+            opacity: 1,
+            margin: 'auto',
+            position: 'relative',
+            inset: 'auto',
+            minHeight: 'auto'
+          }}>
             <div className="modal-header">
               <h3>뉴스레터 발송</h3>
               <button 

@@ -318,8 +318,38 @@ export default function NewsletterEditPage() {
 
       {/* 수신자 선택 모달 */}
       {showRecipientsModal && (
-        <div className="modal-overlay">
-          <div className="modal">
+        <div className="modal-overlay newsletter-edit-modal-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000,
+          visibility: 'visible',
+          opacity: 1
+        }}>
+          <div className="newsletter-edit-modal" style={{
+            background: 'white',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            maxWidth: '500px',
+            width: '90%',
+            maxHeight: '300px !important',
+            height: 'auto !important',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            visibility: 'visible',
+            opacity: 1,
+            margin: 'auto',
+            position: 'relative',
+            inset: 'auto',
+            minHeight: 'auto !important'
+          }}>
             <div className="modal-header">
               <h3>수신자 선택</h3>
               <button 

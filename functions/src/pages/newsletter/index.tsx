@@ -292,8 +292,38 @@ export default function NewsletterPage() {
 
       {/* 발송 설정 모달 */}
       {showSendModal && selectedNewsletter && (
-        <div className="modal-overlay">
-          <div className="modal">
+        <div className="modal-overlay newsletter-send-modal-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000,
+          visibility: 'visible',
+          opacity: 1
+        }}>
+          <div className="newsletter-send-modal" style={{
+            background: 'white',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            maxWidth: '600px',
+            width: '90%',
+            maxHeight: '92vh',
+            height: 'auto',
+            overflow: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            visibility: 'visible',
+            opacity: 1,
+            margin: 'auto',
+            position: 'relative',
+            inset: 'auto',
+            minHeight: 'auto'
+          }}>
             <div className="modal-header">
               <h3>뉴스레터 발송</h3>
               <button 

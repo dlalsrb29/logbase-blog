@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { collection, addDoc, query, where, getDocs, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
-// Slack Webhook URL (환경 변수에서 가져오기)
-const SLACK_WEBHOOK_URL = process.env.SLACK_NEWSLETTER_WEBHOOK_URL;
+// Slack Webhook URL - 하드코딩으로 통일
+const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 
 interface NewsletterRequest {
   name: string;

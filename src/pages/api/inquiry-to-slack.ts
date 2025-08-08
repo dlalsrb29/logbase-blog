@@ -20,13 +20,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ success: false, error: 'Missing required fields' });
       }
 
-      // Slack webhook URL (환경 변수에서 가져오기)
-      const SLACK_WEBHOOK_URL = process.env.SLACK_INQUIRY_WEBHOOK_URL;
-      
-      if (!SLACK_WEBHOOK_URL) {
-        console.error('Slack webhook URL이 설정되지 않았습니다.');
-        return res.status(500).json({ success: false, error: 'Slack webhook not configured' });
-      }
+      // Slack webhook URL - 하드코딩으로 통일
+      const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 
       const slackMessage: any = {
         text: '🆕 새로운 문의의 접수',

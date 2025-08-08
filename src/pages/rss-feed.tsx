@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { RSSItem } from '@/types/rss';
 import { SITE_TITLE } from '@/consts';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function RSSFeedPage() {
+  const { user } = useAuth();
   const [rssItems, setRssItems] = useState<RSSItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -262,9 +264,19 @@ export default function RSSFeedPage() {
     loadRSSData(selectedBlog, 1, pageSize, value, blogSearch);
   };
 
-  // useEffect에서 커서 초기화
+  // useEffect에서 커서 초기화 및 URL 파라미터 처리
   useEffect(() => {
-    loadRSSData(selectedBlog, 1, pageSize);
+    // URL 파라미터에서 검색어 확인
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    
+    if (searchParam) {
+      setBlogSearch(searchParam);
+      // 검색어가 있으면 자동으로 검색 실행
+      loadRSSData(selectedBlog, 1, pageSize, feedType, searchParam);
+    } else {
+      loadRSSData(selectedBlog, 1, pageSize);
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -629,29 +641,48 @@ export default function RSSFeedPage() {
             >
               검색
             </button>
+            {/* 검색 초기화 버튼 */}
+            {blogSearch && (
+              <button
+                type="button"
+                onClick={() => {
+                  setBlogSearch('');
+                  loadRSSData(selectedBlog, 1, pageSize, feedType, '');
+                }}
+                className="migrate-btn"
+                style={{ 
+                  background: '#ef4444',
+                  marginLeft: '8px'
+                }}
+              >
+                초기화
+              </button>
+            )}
           </div>
           <br />
-          <div className="rss-controls" style={{ justifyContent: 'center' }}>
-            {/* RSS 수집용 키워드 관리 버튼 */}
-            <button
-              type="button"
-              onClick={() => setShowKeywordManager(!showKeywordManager)}
-              className="migrate-btn"
-              style={{ background: showKeywordManager ? '#ef4444' : '#10b981' }}
-            >
-              {showKeywordManager ? 'RSS 수집 키워드 관리 닫기' : 'RSS 수집 키워드 관리'}
-            </button>
+          {user && (
+            <div className="rss-controls" style={{ justifyContent: 'center' }}>
+              {/* RSS 수집용 키워드 관리 버튼 */}
+              <button
+                type="button"
+                onClick={() => setShowKeywordManager(!showKeywordManager)}
+                className="migrate-btn"
+                style={{ background: showKeywordManager ? '#ef4444' : '#10b981' }}
+              >
+                {showKeywordManager ? 'RSS 수집 키워드 관리 닫기' : 'RSS 수집 키워드 관리'}
+              </button>
 
-            {/* RSS 피드 관리 버튼 */}
-            <button
-              type="button"
-              onClick={() => setShowFeedManager(!showFeedManager)}
-              className="migrate-btn"
-              style={{ background: showFeedManager ? '#ef4444' : '#3b82f6' }}
-            >
-              {showFeedManager ? 'RSS FEED URL 관리 닫기' : 'RSS FEED URL 관리'}
-            </button>
-          </div>
+              {/* RSS 피드 관리 버튼 */}
+              <button
+                type="button"
+                onClick={() => setShowFeedManager(!showFeedManager)}
+                className="migrate-btn"
+                style={{ background: showFeedManager ? '#ef4444' : '#3b82f6' }}
+              >
+                {showFeedManager ? 'RSS FEED URL 관리 닫기' : 'RSS FEED URL 관리'}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* 인라인 키워드 관리 섹션 */}
@@ -969,17 +1000,20 @@ export default function RSSFeedPage() {
 
         {!loading && !error && (
           <div className="rss-content">
-            <div className="info-banner" style={{
-              background: '#f0f9ff',
-              border: '1px solid #0ea5e9',
-              borderRadius: '8px',
-              padding: '12px 16px',
-              margin: '16px 0',
-              fontSize: '14px'
-            }}>
-              <strong>📅 RSS 수집 정보:</strong> 매일 오전 6시(한국시간)에 <strong>전일 작성된 글</strong>을 자동 수집합니다. 
-              작성일은 <strong>GMT(원본 시간) / KST(한국시간)</strong> 순으로 표시됩니다.
-            </div>
+            
+            {user && (
+              <div className="info-banner" style={{
+                background: '#f0f9ff',
+                border: '1px solid #0ea5e9',
+                borderRadius: '8px',
+                padding: '12px 16px',
+                margin: '16px 0',
+                fontSize: '14px'
+              }}>
+                <strong>📅 RSS 수집 정보:</strong> 매일 오전 6시(한국시간)에 <strong>전일 작성된 글</strong>을 자동 수집합니다. 
+                작성일은 <strong>GMT(원본 시간) / KST(한국시간)</strong> 순으로 표시됩니다.
+              </div>
+            )}
             
             <div className="stats">
               <p>
@@ -994,6 +1028,35 @@ export default function RSSFeedPage() {
                 }
                 (페이지 {currentPage} / {totalPages})
               </p>
+              {blogSearch && (
+                <div style={{
+                  background: '#f0f9ff',
+                  border: '1px solid #0ea5e9',
+                  borderRadius: '6px',
+                  padding: '8px 12px',
+                  marginTop: '8px',
+                  fontSize: '13px',
+                  color: '#0369a1'
+                }}>
+                  🔍 검색어: <strong>"{blogSearch}"</strong>
+                  <button 
+                    onClick={() => {
+                      setBlogSearch('');
+                      loadRSSData(selectedBlog, 1, pageSize, feedType, '');
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#0369a1',
+                      textDecoration: 'underline',
+                      cursor: 'pointer',
+                      marginLeft: '8px'
+                    }}
+                  >
+                    검색 초기화
+                  </button>
+                </div>
+              )}
               
               {/* 페이지 크기 선택 */}
               <select
@@ -1040,7 +1103,7 @@ export default function RSSFeedPage() {
                       )}
                     </p>
                     
-                    {keywords.length > 0 && (
+                    {user && keywords.length > 0 && (
                       <div className="keywords">
                         <strong>키워드:</strong>{' '}
                         {keywords.map((k, i) => (
@@ -1060,31 +1123,33 @@ export default function RSSFeedPage() {
                       </div>
                     )}
                     {/* 키워드 입력 및 추가 버튼 */}
-                    <div className="keyword-input-row">
-                      <input
-                        type="text"
-                        value={keywordInputs[item.guid] || ''}
-                        onChange={e => setKeywordInputs(prev => ({ ...prev, [item.guid]: e.target.value }))}
-                        placeholder="키워드 입력 (쉼표로 구분)"
-                        disabled={!!updatingKeyword[item.guid]}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => handleAddKeyword(item.guid)}
-                        className="add-keyword-btn"
-                        disabled={!!updatingKeyword[item.guid]}
-                      >
-                        {updatingKeyword[item.guid] ? '저장중...' : '추가'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteItem(item.guid)}
-                        className="delete-item-btn"
-                        disabled={!!deletingItem[item.guid]}
-                      >
-                        {deletingItem[item.guid] ? '삭제중...' : '글삭제'}
-                      </button>
-                    </div>
+                    {user && (
+                      <div className="keyword-input-row">
+                        <input
+                          type="text"
+                          value={keywordInputs[item.guid] || ''}
+                          onChange={e => setKeywordInputs(prev => ({ ...prev, [item.guid]: e.target.value }))}
+                          placeholder="키워드 입력 (쉼표로 구분)"
+                          disabled={!!updatingKeyword[item.guid]}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleAddKeyword(item.guid)}
+                          className="add-keyword-btn"
+                          disabled={!!updatingKeyword[item.guid]}
+                        >
+                          {updatingKeyword[item.guid] ? '저장중...' : '추가'}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteItem(item.guid)}
+                          className="delete-item-btn"
+                          disabled={!!deletingItem[item.guid]}
+                        >
+                          {deletingItem[item.guid] ? '삭제중...' : '글삭제'}
+                        </button>
+                      </div>
+                    )}
                     
                     {/* {item.categories && item.categories.length > 0 && (
                       <div className="categories">
@@ -1092,44 +1157,46 @@ export default function RSSFeedPage() {
                       </div>
                     )} */}
                     {/* 뉴스레터 발송일 입력 */}
-                    <div className="newsletter-date-row">
-                      <label htmlFor={`newsletter-date-${item.guid}`}>뉴스레터 발송일:</label>
-                      <input
-                        type="date"
-                        id={`newsletter-date-${item.guid}`}
-                        value={newsletterDates[item.guid] || item.news_letter_sent_date || ''}
-                        onChange={e => setNewsletterDates(prev => ({ ...prev, [item.guid]: e.target.value }))}
-                      />
-                      <button
-                        type="button"
-                        onClick={async () => {
-                          if (!newsletterDates[item.guid]) return;
-                          setSavingNewsletterDate(prev => ({ ...prev, [item.guid]: true }));
-                          try {
-                            const res = await fetch('/api/rss-migrate/newsletter-date', {
-                              method: 'POST',
-                              headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({ guid: item.guid, news_letter_sent_date: newsletterDates[item.guid] })
-                            });
-                            const result = await res.json();
-                            if (result.success) {
-                              setRssItems(prev => prev.map(r => r.guid === item.guid ? { ...r, news_letter_sent_date: newsletterDates[item.guid] } : r));
-                              alert('뉴스레터 발송일이 저장되었습니다.');
-                            } else {
-                              alert('뉴스레터 발송일 저장 실패: ' + (result.error || result.message));
+                    {user && (
+                      <div className="newsletter-date-row">
+                        <label htmlFor={`newsletter-date-${item.guid}`}>뉴스레터 발송일:</label>
+                        <input
+                          type="date"
+                          id={`newsletter-date-${item.guid}`}
+                          value={newsletterDates[item.guid] || item.news_letter_sent_date || ''}
+                          onChange={e => setNewsletterDates(prev => ({ ...prev, [item.guid]: e.target.value }))}
+                        />
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            if (!newsletterDates[item.guid]) return;
+                            setSavingNewsletterDate(prev => ({ ...prev, [item.guid]: true }));
+                            try {
+                              const res = await fetch('/api/rss-migrate/newsletter-date', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ guid: item.guid, news_letter_sent_date: newsletterDates[item.guid] })
+                              });
+                              const result = await res.json();
+                              if (result.success) {
+                                setRssItems(prev => prev.map(r => r.guid === item.guid ? { ...r, news_letter_sent_date: newsletterDates[item.guid] } : r));
+                                alert('뉴스레터 발송일이 저장되었습니다.');
+                              } else {
+                                alert('뉴스레터 발송일 저장 실패: ' + (result.error || result.message));
+                              }
+                            } catch (err) {
+                              alert('뉴스레터 발송일 저장 중 오류 발생');
+                            } finally {
+                              setSavingNewsletterDate(prev => ({ ...prev, [item.guid]: false }));
                             }
-                          } catch (err) {
-                            alert('뉴스레터 발송일 저장 중 오류 발생');
-                          } finally {
-                            setSavingNewsletterDate(prev => ({ ...prev, [item.guid]: false }));
-                          }
-                        }}
-                        className="save-newsletter-btn"
-                        disabled={!newsletterDates[item.guid] || !!savingNewsletterDate[item.guid]}
-                      >
-                        {savingNewsletterDate[item.guid] ? '저장중...' : '저장'}
-                      </button>
-                    </div>
+                          }}
+                          className="save-newsletter-btn"
+                          disabled={!newsletterDates[item.guid] || !!savingNewsletterDate[item.guid]}
+                        >
+                          {savingNewsletterDate[item.guid] ? '저장중...' : '저장'}
+                        </button>
+                      </div>
+                    )}
                   </article>
                 );
               })}

@@ -2,8 +2,19 @@
 
 import Link from 'next/link';
 import { SITE_TITLE } from '@/consts';
+import { useState } from 'react';
+import InquiryForm from './InquiryForm';
+import NewsletterModal from './NewsletterModal';
+import LoginModal from './LoginModal';
 
 export default function Header() {
+  const [showInquiry, setShowInquiry] = useState(false);
+  const [showNewsletter, setShowNewsletter] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleRssClick = async () => {
     let isCollecting = false;
     let completeTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -145,75 +156,440 @@ export default function Header() {
 
   return (
     <>
-      <header>
-        <nav>
-          {/* 사이트 로고 (좌측) */}
-          <h2><Link href="/">{SITE_TITLE}</Link></h2>
-          
-          {/* 내부 페이지 이동 링크 (가운데) */}
-          <div className="internal-links">
-            <Link href="/">Home</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/about">About</Link>
-            <Link href="/rss-feed">RSS-FEED</Link>
-            <Link href="/newsletter">NEWS-LETTER</Link>
+
+	<header id="header" data-controller="search" data-search-url-value="tv_search_inspiration" data-search-selected-type-value="inspiration">
+		<div className="inner">
+			<div className="c-header-main">
+				<div className="header-main" data-search-target="headerMain">
+					<div className="header-main__overlay " data-search-target="overlay" data-action="click->search#close"></div>
+					<div className="header-main__container">
+						<div className="header-main__hamburger" data-search-target="hamburger" data-action="click->search#toggleMobile">
+							<svg className="ico-svg" viewBox="0 0 20 20" width="16">
+								<use xlinkHref="/"></use>
+							</svg>
+          				</div>
+						<a href="/" className="header-main__logo" aria-label="logbase">
+							{/* 회사 로고 
+							<svg width="30" height="16" viewBox="0 0 30 16"><path d="m18.4 0-2.803 10.855L12.951 0H9.34L6.693 10.855 3.892 0H0l5.012 15.812h3.425l2.708-10.228 2.709 10.228h3.425L22.29 0h-3.892ZM24.77 13.365c0 1.506 1.12 2.635 2.615 2.635C28.879 16 30 14.87 30 13.365c0-1.506-1.12-2.636-2.615-2.636s-2.615 1.13-2.615 2.636Z"></path></svg>
+							 회사 로고 */}
+							<span style={{
+								fontSize: '24px',
+								fontWeight: '700',
+								fontFamily: 'Inter, sans-serif',
+								background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+								backgroundClip: 'text',
+								WebkitBackgroundClip: 'text',
+								WebkitTextFillColor: 'transparent',
+								letterSpacing: '-0.5px',
+								textTransform: 'uppercase',
+								position: 'relative',
+								display: 'inline-block'
+							}}>
+								LOGBASE
+							</span>
+						</a>
+						<nav className="nav-header-main" data-search-target="navHeaderMain">
+							<ul className="nav-header-main__list">
+								{/*
+								<li className="nav-header-main__item has-dropdown">
+									<span className="nav-header-main__link" data-search-target="eLinksDD" data-action="click->search#toggleDropdown">
+										Explore
+										<svg className="ico-svg nav-header-main__arrow" viewBox="0 0 20 20" width="8">
+											<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#arrow-dd"></use>
+										</svg>
+									</span>
+									<div className="nav-header-main__dropdown">
+										<div className="nav-header-main__content">
+											<div className="search-inspiration">
+												<nav className="search-inspiration__nav">
+													<ul className="search-inspiration__menu">
+														<li>
+															<span className="search-inspiration__section" data-section="nav" data-search-target="navAwwards" data-action="click->search#doToogleTab">
+																<svg className="ico-svg ico-svg search-inspiration__ico" viewBox="0 0 20 20" width="14">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#wheat"></use>
+																</svg>
+																Awards
+																<svg className="ico-svg search-inspiration__arrow" viewBox="0 0 20 20" width="8">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#arrow-dd"></use>
+																</svg>
+
+															</span>
+															<ul className="search-inspiration__list">
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/" data-count="25K">
+																		<span>Honor Mentions</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/nominees/" data-count="48K">
+																		<span>Nominees</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/sites_of_the_day/" data-count="6060">
+																		<span>Sites of the Day</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/sites_of_the_month/" data-count="195">
+																		<span>Sites of the Month</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/sites_of_the_year/" data-count="64">
+																		<span>Sites of the Year</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/honors/winners" data-count="">
+																		<span>Honors
+																			<span className="budget-tag budget-tag--solid--black">New</span>
+																		</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/winner-list/" data-count="">
+																		<span>Most Awarded Profiles</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/jury/2025/" data-count="">
+																		<span>Jury 2025</span>
+																	</a>
+																</li>
+															</ul>
+														</li>
+														<li>
+															<span className="search-inspiration__section" data-section="search" data-search-target="navTrending" data-action="click->search#doToogleTab">
+																		<svg className="ico-svg ico-svg search-inspiration__ico" viewBox="0 0 20 20" width="14">
+																			<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#flame"></use>
+																		</svg>
+																			Trending
+																		<svg className="ico-svg search-inspiration__arrow" viewBox="0 0 20 20" width="8">
+																			<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#arrow-dd"></use>
+																		</svg>
+															</span>
+															<ul className="search-inspiration__list">
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/portfolio/" data-count="9080">
+																		<span>Portfolio Websites</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/awwwards/collections/free-fonts/" data-count="288">
+																		<span>Free fonts</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/animation/" data-count="10774">
+																		<span>Animated websites</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/" data-count="6560">
+																		<span>Sites of the Day</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/scrolling/" data-count="5558">
+																		<span>Scrolling</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/single-page/" data-count="5494">
+																		<span>One page design</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/ui-design/" data-count="6646">
+																		<span>UI design</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/e-commerce/" data-count="6006">
+																		<span>E-commerce layouts</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/architecture/" data-count="2806">
+																		<span>Architecture websites</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/photography/" data-count="1450">
+																		<span>Photography websites</span>
+																	</a>
+																</li>
+															</ul>
+														</li>
+														<li>
+															<span className="search-inspiration__section" data-search-target="eSection" data-action="click->search#doToogleTab">
+																<svg className="ico-svg ico-svg search-inspiration__ico" viewBox="0 0 20 20" width="14">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#geometric-1"></use>
+																</svg>
+																By Category
+																<svg className="ico-svg search-inspiration__arrow" viewBox="0 0 20 20" width="8">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#arrow-dd"></use>
+																</svg>
+															</span>
+															<ul className="search-inspiration__list">
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/e-commerce/" data-count="6006">
+																		<span>E-commerce</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/architecture/" data-count="2806">
+																		<span>Architecture</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/hotel-restaurant/" data-count="2134">
+																		<span>Restaurant & Hotel</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/design-agencies/" data-count="10806">
+																		<span>Design Agencies</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/business-corporate/" data-count="10800">
+																		<span>Business & Corporate</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/fashion/" data-count="3478">
+																		<span>Fashion</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/mobile-apps/" data-count="2902">
+																		<span>Mobile & Apps</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/interaction-design/" data-count="3022">
+																		<span>Interaction Design</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/illustration/" data-count="3862">
+																		<span>Illustration</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/header-design/" data-count="1366">
+																		<span>Header Design</span>
+																	</a>
+																</li>
+															</ul>
+														</li>
+														<li>
+															<span className="search-inspiration__section" data-search-target="eSection" data-action="click->search#doToogleTab">
+																<svg className="ico-svg ico-svg search-inspiration__ico" viewBox="0 0 20 20" width="14">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#geometric-2"></use>
+																</svg>
+																By Technology
+																<svg className="ico-svg search-inspiration__arrow" viewBox="0 0 20 20" width="8">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#arrow-dd"></use>
+																</svg>
+															</span>
+															<ul className="search-inspiration__list">
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/awwwards/collections/css-js-animations/" data-count="630">
+																		<span>CSS animations</span>
+																	</a>
+																</li>
+																	<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/wordpress/" data-count="10770">
+																		<span>Wordpress</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/shopify/" data-count="706">
+																		<span>Shopify</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/webgl/" data-count="3286">
+																		<span>WebGL sites</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/react/" data-count="2102">
+																		<span>React Websites</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/3d/" data-count="3542">
+																		<span>3D websites</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/figma/" data-count="1910">
+																		<span>Figma</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/gsap-animation/" data-count="4022">
+																		<span>Gsap</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/framer-motion/" data-count="96">
+																		<span>Framer</span>
+																	</a>
+																</li>
+																<li>
+																	<a className="search-inspiration__item" href="https://www.awwwards.com/websites/webflow/" data-count="1302">
+																		<span>Webflow</span>
+																	</a>
+																</li>
+															</ul>
+														</li>
+														<li>
+															<a href="https://www.awwwards.com/collections/" className="search-inspiration__section">
+																<svg className="ico-svg ico-svg search-inspiration__ico" viewBox="0 0 20 20" width="14">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#geometric-3"></use>
+																</svg>
+																Collections
+																<svg className="ico-svg search-inspiration__arrow" viewBox="0 0 20 20" width="8">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#arrow-dd"></use>
+																</svg>
+															</a>
+														</li>
+														<li>
+															<a href="https://www.awwwards.com/blog/" className="search-inspiration__section">
+																<svg className="ico-svg ico-svg search-inspiration__ico" viewBox="0 0 20 20" width="14">
+																	<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#geometric-4"></use>
+																</svg>
+																Blog
+															</a>
+														</li>
+													</ul>
+												</nav>
+												<div className="search-inspiration__searching" data-search-target="autocompleteView">
+													<div data-search-target="autocompleteTagsContainer">
+														<ul className="search-inspiration__list" data-search-target="autocompleteTags"></ul>
+													</div>
+													<div data-search-target="autocompleteUsersContainer">
+														<ul className="search-inspiration__list" data-search-target="autocompleteUsers"></ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>*/}
+								<li className="nav-header-main__item">
+									<a className="nav-header-main__link" href="/">HOME</a>
+								</li>
+								<li className="nav-header-main__item">
+									<a className="nav-header-main__link" href="/rss-feed">DATA INSIGHTS</a>
+								</li>
+								<li className="nav-header-main__item">
+									<a className="nav-header-main__link" href="/newsletter">NEWS LETTER</a>
+								</li>
+								{/*
+								<li className="nav-header-main__item">
+									<a className="nav-header-main__link" href="https://www.awwwards.com/academy/">
+										Academy<span className="budget-tag budget-tag--small--solid--black anim-shiny"><span>New</span></span>
+									</a>
+								</li>
+								<li className="nav-header-main__item">
+									<a className="nav-header-main__link" href="https://www.awwwards.com/jobs/">
+										Jobs
+									</a>
+								</li>
+								<li className="nav-header-main__item">
+									<a className="nav-header-main__link" href="https://www.awwwards.com/market/">
+										Market
+									</a>
+								</li>
+								*/}
+							</ul>
+							{/*
+							<ul className="nav-header-main__social">
+								<li>
+									<a href="https://www.facebook.com/awwwards" target="_blank">
+										<svg className="ico-svg" viewBox="0 0 20 20" width="20">
+											<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#facebook"></use>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.instagram.com/awwwards" target="_blank">
+										<svg className="ico-svg" viewBox="0 0 20 20" width="20">
+											<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#instagram"></use>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://twitter.com/awwwards" target="_blank">
+										<svg className="ico-svg" viewBox="0 0 20 20" width="20">
+											<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#twitter"></use>
+              							</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.instagram.com/awwwards" target="_blank">
+										<svg className="ico-svg" viewBox="0 0 20 20" width="20">
+											<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#instagram"></use>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.youtube.com/awwwardstv" target="_blank">
+										<svg className="ico-svg" viewBox="0 0 20 20" width="20">
+											<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#youtube"></use>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.tiktok.com/@awwwards.com" className="tiktok">
+										<svg className="ico-svg" viewBox="0 0 20 20" width="20">
+											<use xlinkHref="https://www.awwwards.com/assets/redesign/images/sprite-icons.svg?v=3#tiktok"></use>
+										</svg>
+									</a>
+								</li>
+							</ul>
+							*/}
+						</nav>
+						<div className="header-main__search">
+							<div className="search-form">
+								<div className="search-form__field">
+									<button type="submit" className="search-form__button" aria-label="Search">
+										<svg className="ico-svg" viewBox="0 0 20 20" width="14">
+											<use xlinkHref="/"></use>
+										</svg>
+									</button>
+									<input type="text" placeholder="Search by Inspiration" className="search-form__input " data-action="focus->search#show keyup->search#search" data-search-target="input" />
+								</div>
+							</div>
+						</div>
+						<div className="header-main__right">
+							<div className="header-main__user">
+								<strong className="header-main__link hidden-sm" onClick={() => setShowLogin(true)}>Log in</strong>
+								{/*<strong className="header-main__link hidden-sm" data-controller="login" data-action="click->login#register">Sign Up</strong>*/}
+								<span className="header-main__ico" onClick={() => setShowLogin(true)}>
+									<svg className="ico-svg" viewBox="0 0 20 20" width="20">
+										<use xlinkHref="/"></use>
+									</svg>
+								</span>
+								<div id="g_id_onload" data-client_id="67367874134-drekvs51ripc1p92r1hpcntjk1jfmqka.apps.googleusercontent.com" data-login_uri="https://www.awwwards.com/login-google-one-tap" data-_destination="/pro">
+								</div>
+							</div>
+
+							<div className="header-main__bts">
+								<a href="#" className="button button--small--rounded" onClick={() => setShowNewsletter(true)}>뉴스레터 신청</a>
+								<a href="#" className="button button--small--outline--rounded" onClick={() => setShowInquiry(true)}>문의하기</a>
+								<a href="#" className="button button--small--rounded" onClick={() => handleRssClick()}>RSS 수집</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
           </div>
-          
-          {/* 소셜/외부 링크 및 RSS 저장 버튼 (우측) */}
-          <div className="social-links">
-            {/* RSS 아이콘 버튼 */}
-            <button
-              type="button"
-              id="rssButton"
-              aria-label="RSS Feed"
-              onClick={handleRssClick}
-            >
-              <span className="sr-only">RSS Feed</span>
-              {/* RSS 아이콘 (SVG) */}
-              <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 11a9 9 0 0 1 9 9"/>
-                <path d="M4 4a16 16 0 0 1 16 16"/>
-                <circle cx="5" cy="19" r="1"/>
-              </svg>
-            </button>
-            
-            {/* Mastodon(웹투) 아이콘 링크 */}
-            <a href="https://m.webtoo.ls/@astro" target="_blank" rel="noopener noreferrer">
-              <span className="sr-only">Follow Astro on Mastodon</span>
-              {/* Mastodon 아이콘 (SVG) */}
-              <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
-                <path
-                  fill="currentColor"
-                  d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"
-                />
-              </svg>
-            </a>
-            
-            {/* Twitter 아이콘 링크 */}
-            <a href="https://twitter.com/astrodotbuild" target="_blank" rel="noopener noreferrer">
-              <span className="sr-only">Follow Astro on Twitter</span>
-              {/* Twitter 아이콘 (SVG) */}
-              <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
-                <path
-                  fill="currentColor"
-                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-                />
-              </svg>
-            </a>
-            
-            {/* GitHub 아이콘 링크 */}
-            <a href="https://github.com/withastro/astro" target="_blank" rel="noopener noreferrer">
-              <span className="sr-only">Go to Astro&apos;s GitHub repo</span>
-              {/* GitHub 아이콘 (SVG) */}
-              <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
-                <path
-                  fill="currentColor"
-                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                />
-              </svg>
-            </a>
-          </div>
-        </nav>
       </header>
 
       {/* 전역 로딩 화면 (RSS 수집 시에만 표시) */}
@@ -259,6 +635,22 @@ export default function Header() {
             });
           `
         }}
+      />
+
+      {/* 모달 컴포넌트들 */}
+      <NewsletterModal 
+        show={showNewsletter} 
+        onClose={() => setShowNewsletter(false)} 
+      />
+      
+      <InquiryForm 
+        show={showInquiry} 
+        onClose={() => setShowInquiry(false)} 
+      />
+      
+      <LoginModal 
+        show={showLogin} 
+        onClose={() => setShowLogin(false)} 
       />
     </>
   );
